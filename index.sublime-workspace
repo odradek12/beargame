@@ -1,0 +1,240 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"another",
+				"anotherComp"
+			],
+			[
+				"set",
+				"setScale"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/wamp64/www/phaser/beargame"
+	],
+	"file_history":
+	[
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_05/end/grid_component/grid_component.html",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_05/end/grid_component/style.css",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_05/begin/grid_component/grid_component.html",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_05/end/grid_component/AsteroidGrid.js",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_05/begin/grid_component/AsteroidGrid.js",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_02/end/component.html",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_02/begin/component.html",
+		"/C/wamp64/www/ll-vue/Ex_Files_VueJS/Exercise Files/ch4/04_04/begin/slots.html",
+		"/C/wamp64/www/forumcom/sites/default/default.settings.php",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Settings/SideBarEnhancements.json",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/odrad/OneDrive/Documents/Sublime Projects/ll-vue.sublime-project",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/User/openinbrowser.sublime-settings",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/odrad/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings",
+		"/C/wamp64/www/phaser/phaser3-tutorial-src/game.js",
+		"/C/wamp64/www/phaser/bouncingball/game.js",
+		"/C/wamp64/www/phaser/Ex_Files_HTML5_Phaser/Ex_Files_HTML5_Phaser/Exercise Files/COMPLETED PROJECT/Bunny Defender/Game.js",
+		"/C/wamp64/www/phaser/bouncingball/index.html",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/components/data/change data event.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/scenes/ui scene.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/scenes/registry data exchange.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/scenes/changing large scene.js",
+		"/C/wamp64/www/phaser/Ex_Files_HTML5_Phaser/Ex_Files_HTML5_Phaser/Exercise Files/COMPLETED PROJECT/Bunny Defender/Boot.js",
+		"/C/wamp64/www/phaser/Ex_Files_HTML5_Phaser/Ex_Files_HTML5_Phaser/Exercise Files/COMPLETED PROJECT/Bunny Defender/index.html",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/games/flood/flood-fill.js",
+		"/C/wamp64/www/phaser/phaser/index.html",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/camera/pan to.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/camera/follow user controlled sprite.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/camera/follow sprite.js",
+		"/C/wamp64/www/phaser/phaser3-tutorial-src/part8.html",
+		"/C/wamp64/www/phaser/phaser3-tutorial-src/part1.html",
+		"/C/Users/odrad/OneDrive/Documents/Sublime Projects/phaser.sublime-project",
+		"/C/wamp64/www/phaser/phaser/testproject/index.html",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/physics/arcade/1000 world bodies.js",
+		"/C/wamp64/www/phaser/phaser3-examples/public/src/physics/arcade/100 world bodies.js",
+		"/C/wamp64/www/phaser/phaser3-examples/tester/index.html"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"playGame",
+			"setText",
+			"scoreText",
+			"score",
+			"physic",
+			"gameOver",
+			"gameobjectup",
+			"event",
+			"text",
+			"boost",
+			"star",
+			"overmessage",
+			"gameov",
+			"gameover",
+			"camer",
+			"gameobjectup",
+			"clickHandler"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 302.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
