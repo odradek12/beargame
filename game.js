@@ -10,6 +10,7 @@ var scl = .6;
 var rabbitScl = scl-.075;
 var maxBunnies = 5;
 var swipeAnim;
+var pawDistance = 105;
 var swiping = false;
 
 window.onload = function(){
@@ -60,16 +61,16 @@ class playGame extends Phaser.Scene{
         paw = this.physics.add.sprite(300, 525, null);
         paw.visible = false;
         paw.setSize(60, 60, true);
-        
-        this.physics.add.overlap(player, paw, function() { }, null, this);
 
 		bunnies = this.physics.add.group({
 			key: 'rabbit',
 			repeat: maxBunnies,
-			setXY: { x: 12, y: game.config.height, stepX: 200 }
+			setXY: { x: 12, y: game.config.height-1, stepX: 180 }
 		});
 
-		for (let i=0; i < maxBunnies; i++){
+		this.physics.add.overlap(bunnies, paw, function() { console.log("buH"); }, null, this);
+
+		for (let i=0; i <= maxBunnies; i++){
 			// console.log(bunnies.children.entries[i]);
 			let b = bunnies.children.entries[i];
 			b.setCollideWorldBounds(true);
@@ -119,6 +120,7 @@ class playGame extends Phaser.Scene{
 		player.on('animationcomplete', this.swipingComplete, this);
 
 		this.input.keyboard.on('keydown_D', function (event) {
+			console.log(swipeAnim.isPlaying);
 			if(!swiping){
 				swiping = true;
 				player.setVelocityX(0);
@@ -134,6 +136,7 @@ class playGame extends Phaser.Scene{
 			if (cursors.right.isDown){
 				// player.scaleX = scl;
 				//may need to remove setFlipX since it may be only cosmetic and not change the hitbox when you turn around
+				pawDistance = 105;
 				player.setFlipX(false);
 				player.setVelocityX(spd);
 
@@ -141,6 +144,7 @@ class playGame extends Phaser.Scene{
 			}
 			else if (cursors.left.isDown){
 				// player.scaleX = -scl;
+				pawDistance = -105;
 				player.setFlipX(true);
 				player.setVelocityX(-spd);
 
@@ -151,7 +155,7 @@ class playGame extends Phaser.Scene{
 				player.anims.play('inert', true);
 			}
 		}
-		paw.x = player.x + 105;
+		paw.x = player.x + pawDistance;
 
 	}
 
@@ -197,12 +201,12 @@ class playGame extends Phaser.Scene{
 
 	swipingComplete(animation, frame){
 		if(animation.key === "swipe"){
-				swiping = false;
+			swiping = false;
 		}
 		player.anims.play('inert', true);
 	}
 
 	fuh(){
-		console.log("animation");
+		// if(swipeAnim.isPlay)
 	}
 }
