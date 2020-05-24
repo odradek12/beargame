@@ -2,16 +2,15 @@ var game;
 
 var player;
 var bunnies;
+var paw;
 var cursors;
 
 var spd = 220;
 var scl = .6;
 var rabbitScl = scl-.075;
-var right = true;
 var maxBunnies = 5;
 var swipeAnim;
 var swiping = false;
-var d;
 
 window.onload = function(){
 	let config = {
@@ -21,8 +20,8 @@ window.onload = function(){
 		physics: {
 			default: 'arcade',
 			arcade: {
-				gravity: { y: 300 },
-				debug: false
+				// gravity: { y: 300 },
+				debug: true
 			}
 		},
 		scene: playGame
@@ -53,14 +52,16 @@ class playGame extends Phaser.Scene{
 		let sky = this.add.image(400, 300, 'sky');
 		sky.scaleX = 2;
 
-		player = this.physics.add.sprite(300, game.config.height, 'bear');
+		player = this.physics.add.sprite(200, game.config.height, 'bear');
 		player.setSize(200, 380, true);
 		player.setScale(scl);
-		// player.anchor.setTo(0.5, 0.5);
-		// player.setOrigin(1, 0.5);
-
-		// player.setBounce(0.2);
 		player.setCollideWorldBounds(true);
+
+        paw = this.physics.add.sprite(300, 525, null);
+        paw.visible = false;
+        paw.setSize(60, 60, true);
+        
+        this.physics.add.overlap(player, paw, function() { }, null, this);
 
 		bunnies = this.physics.add.group({
 			key: 'rabbit',
@@ -68,8 +69,6 @@ class playGame extends Phaser.Scene{
 			setXY: { x: 12, y: game.config.height, stepX: 200 }
 		});
 
-		// bunnies = this.physics.add.sprite(300, 250, 'rabbit');
-		// bunnies.setScale(scl);
 		for (let i=0; i < maxBunnies; i++){
 			// console.log(bunnies.children.entries[i]);
 			let b = bunnies.children.entries[i];
@@ -81,22 +80,11 @@ class playGame extends Phaser.Scene{
 		this.cameras.main.startFollow(player);
 
 		this.anims.create({
-			key: 'right',
+			key: 'walking',
 			frames: this.anims.generateFrameNames('bear', {
 		        prefix: 'bear_fin3',
-		        start: 2,
-		        end: 5,
-		        zeroPad: 4
-		    }),
-			frameRate:8,
-			repeat: -1
-		});
-		this.anims.create({
-			key: 'left',
-			frames: this.anims.generateFrameNames('bear', {
-		        prefix: 'bear_fin3',
-		        start: 6,
-		        end: 9,
+		        start: 1,
+		        end: 4,
 		        zeroPad: 4
 		    }),
 			frameRate:8,
@@ -106,20 +94,15 @@ class playGame extends Phaser.Scene{
 			key: 'swipe',
 			frames: this.anims.generateFrameNames('bear', {
 		        prefix: 'bear_fin3',
-		        start: 10,
-		        end: 12,
+		        start: 5,
+		        end: 7,
 		        zeroPad: 4
 		    }),
 			frameRate:8
 		});
 		this.anims.create({
-			key: 'inert-right',
+			key: 'inert',
 			frames: [ { key: 'bear', frame: 0 }],
-			frameRate:10
-		});
-		this.anims.create({
-			key: 'inert-left',
-			frames: [ { key: 'bear', frame: 1 }],
 			frameRate:10
 		});
 		this.anims.create({
@@ -135,43 +118,41 @@ class playGame extends Phaser.Scene{
 		});
 		player.on('animationcomplete', this.swipingComplete, this);
 
-		this.input.keyboard.on('keydown_SPACE', function (event) {
-			swiping = true;
-			player.setVelocityX(0);
-	        player.anims.play('swipe', true);
+		this.input.keyboard.on('keydown_D', function (event) {
+			if(!swiping){
+				swiping = true;
+				player.setVelocityX(0);
+		        player.anims.play('swipe', true);
+		    }
 	    });
 
 		cursors = this.input.keyboard.createCursorKeys();
-		d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 	}
 
 	update(){
 		if(!swiping){
 			if (cursors.right.isDown){
+				// player.scaleX = scl;
+				//may need to remove setFlipX since it may be only cosmetic and not change the hitbox when you turn around
+				player.setFlipX(false);
 				player.setVelocityX(spd);
-				right = true;
 
-				player.anims.play('right', true);
+				player.anims.play('walking', true);
 			}
 			else if (cursors.left.isDown){
+				// player.scaleX = -scl;
+				player.setFlipX(true);
 				player.setVelocityX(-spd);
-				right = false;
 
-				player.anims.play('left', true);
+				player.anims.play('walking', true);
 			}
 			else {
 				player.setVelocityX(0);
-
-				switch(right){
-					case true:
-						player.anims.play('inert-right', true);
-						break;
-					case false:
-						player.anims.play('inert-left', true);
-						break;
-				}			
+				player.anims.play('inert', true);
 			}
 		}
+		paw.x = player.x + 105;
+
 	}
 
 	bunMove(b){
@@ -194,9 +175,11 @@ class playGame extends Phaser.Scene{
 	        duration: 1000,
 	        onActive: function(){
         		if (bpostition > b.x) {
-					b.scaleX = -rabbitScl;
+					// b.scaleX = -rabbitScl;
+					b.setFlipX(true);
 				} else {
-					b.scaleX = rabbitScl;
+					// b.scaleX = rabbitScl;
+					b.setFlipX(false);
 				}
 
 	        	b.play('rabbit-hop'); },
@@ -204,19 +187,22 @@ class playGame extends Phaser.Scene{
 	        onComplete: function(){
 				b.play('rabbit-inert');
 				this.bunMove(b);
-	        }
+	        },
 	        // onStart: function () { console.log('onStart'); console.log(arguments); },
 	        // onComplete: function () { console.log('onComplete'); console.log(arguments); },
 	        // onYoyo: function () { console.log('onYoyo'); console.log(arguments); },
 	        // onRepeat: function () { console.log('onRepeat'); console.log(arguments); },
 	    });
-		// b.x += 150;
 	}
 
 	swipingComplete(animation, frame){
 		if(animation.key === "swipe"){
 				swiping = false;
 		}
-		player.anims.play('inert-right', true);
+		player.anims.play('inert', true);
+	}
+
+	fuh(){
+		console.log("animation");
 	}
 }
