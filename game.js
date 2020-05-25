@@ -12,6 +12,8 @@ var maxBunnies = 5;
 var swipeAnim;
 var pawDistance = 105;
 var swiping = false;
+var swipableKeyUp = true;
+var overlapTriggered = false;
 
 window.onload = function(){
 	let config = {
@@ -68,7 +70,7 @@ class playGame extends Phaser.Scene{
 			setXY: { x: 12, y: game.config.height-1, stepX: 180 }
 		});
 
-		this.physics.add.overlap(bunnies, paw, function() { console.log("buH"); }, null, this);
+		this.physics.add.overlap(bunnies, paw, this.swipeBunny, null, this);
 
 		for (let i=0; i <= maxBunnies; i++){
 			// console.log(bunnies.children.entries[i]);
@@ -120,12 +122,21 @@ class playGame extends Phaser.Scene{
 		player.on('animationcomplete', this.swipingComplete, this);
 
 		this.input.keyboard.on('keydown_D', function (event) {
-			console.log(swipeAnim.isPlaying);
-			if(!swiping){
+			// console.log(swipeAnim.isPlaying);
+			
+			if(!swiping && swipableKeyUp){
+				overlapTriggered = false;
 				swiping = true;
 				player.setVelocityX(0);
 		        player.anims.play('swipe', true);
 		    }
+		    swipableKeyUp = false;
+	    });
+
+	    this.input.keyboard.on('keyup_D', function (event) {
+	    	// setTimeout(function(){
+				swipableKeyUp = true;
+			// }, 3000);
 	    });
 
 		cursors = this.input.keyboard.createCursorKeys();
@@ -156,7 +167,6 @@ class playGame extends Phaser.Scene{
 			}
 		}
 		paw.x = player.x + pawDistance;
-
 	}
 
 	bunMove(b){
@@ -206,7 +216,11 @@ class playGame extends Phaser.Scene{
 		player.anims.play('inert', true);
 	}
 
-	fuh(){
-		// if(swipeAnim.isPlay)
+	swipeBunny(bear, bunny){
+		if(player.anims.getCurrentKey() === "swipe" && player.anims.currentFrame.index == 2 && !overlapTriggered){
+			console.log("bunny's x is " + bunny.x);
+			bunny.disableBody(true, true);
+			overlapTriggered = true;
+		}
 	}
 }
