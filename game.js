@@ -6,14 +6,14 @@ var paw;
 var cursors;
 
 var spd = 220;
-var scl = .6;
-var rabbitScl = scl-.075;
+var scl = 0.6;
+var rabbitScl = scl-0.075;
 var maxBunnies = 5;
-var swipeAnim;
 var pawDistance = 105;
 var swiping = false;
 var swipableKeyUp = true;
 var overlapTriggered = false;
+var timer;
 
 window.onload = function(){
 	let config = {
@@ -28,10 +28,10 @@ window.onload = function(){
 			}
 		},
 		scene: playGame
-	}
+	};
 	game = new Phaser.Game(config);
 	window.focus();
-}
+};
 
 class playGame extends Phaser.Scene{
 	constructor(){
@@ -76,8 +76,9 @@ class playGame extends Phaser.Scene{
 			// console.log(bunnies.children.entries[i]);
 			let b = bunnies.children.entries[i];
 			b.setCollideWorldBounds(true);
-			b.setScale(rabbitScl);
-			this.bunMove(b);
+			this.initializeBunny(b);
+			// b.setScale(rabbitScl);
+			// this.bunMove(b);
 		}
 
 		this.cameras.main.startFollow(player);
@@ -93,7 +94,7 @@ class playGame extends Phaser.Scene{
 			frameRate:8,
 			repeat: -1
 		});
-		swipeAnim = this.anims.create({
+		this.anims.create({
 			key: 'swipe',
 			frames: this.anims.generateFrameNames('bear', {
 		        prefix: 'bear_fin3',
@@ -122,7 +123,6 @@ class playGame extends Phaser.Scene{
 		player.on('animationcomplete', this.swipingComplete, this);
 
 		this.input.keyboard.on('keydown_D', function (event) {
-			// console.log(swipeAnim.isPlaying);
 			
 			if(!swiping && swipableKeyUp){
 				overlapTriggered = false;
@@ -167,6 +167,11 @@ class playGame extends Phaser.Scene{
 			}
 		}
 		paw.x = player.x + pawDistance;
+	}
+
+	initializeBunny(b){
+		b.setScale(rabbitScl);
+		this.bunMove(b);
 	}
 
 	bunMove(b){
@@ -218,9 +223,16 @@ class playGame extends Phaser.Scene{
 
 	swipeBunny(bear, bunny){
 		if(player.anims.getCurrentKey() === "swipe" && player.anims.currentFrame.index == 2 && !overlapTriggered){
-			console.log("bunny's x is " + bunny.x);
+			// console.log("bunny's x is " + bunny.x);
 			bunny.disableBody(true, true);
 			overlapTriggered = true;
 		}
+		timer = this.time.delayedCall(3000, function(){
+			if (bunnies.countActive(true) < 6){				
+				var x = Phaser.Math.Between(50, this.physics.world.bounds.width-200);
+				var b = bunnies.create(x, 550, "rabbit");
+				this.initializeBunny(b);				
+			}
+		}, [], this);
 	}
 }
